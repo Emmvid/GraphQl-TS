@@ -2,16 +2,15 @@ import { buildSchema } from "graphql";
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
 
-// Data hårdkodad in vår kod istället för att hämta från en databas
-//............//
+
 export const users = [
-  { id: 1, name: "banan", email: "Kurt@gmail.com" },
-  { id: 2, name: "apelsin", email: "Sofia@gmail.com" },
-  { id: 3, name: "Äpple", email: "Bruce@gmail.com" },
+  { id: 1, name: "banana", description: "a yellow fruit" },
+  { id: 2, name: "orange", description: "an orange fruit" },
+  { id: 3, name: "apple", description: "Could be green or red!" },
 ];
 
 // Schema
-//--------------------//
+
 export const schema = buildSchema(`
     type Query {
         getUser(id: Int!): User
@@ -21,12 +20,12 @@ export const schema = buildSchema(`
     type User {
         id: Int!
         name: String!
-        email: String!
+        description: String!
     }
 
     input UserInput {
         name: String!
-        email: String!
+        description: String!
     }
 
     type Mutation {
@@ -39,9 +38,9 @@ export const schema = buildSchema(`
 type User = {
   id: number;
   name: string;
-  email: string;
+  description: string;
 };
-type UserInput = Pick<User, "name" | "email">;
+type UserInput = Pick<User, "name" | "description">;
 
 // Resolver
 
